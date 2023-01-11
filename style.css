@@ -1,17 +1,24 @@
+body {
+    overflow: hidden;
+    margin: 0;
+}
+
 /* Séparer la page en deux */
 main {
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
 }
 
 main>div {
-    overflow: scroll;
+    overflow-y: scroll;
+    padding: 20px;
 }
 
 .affichage{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    padding: 0;
 }
