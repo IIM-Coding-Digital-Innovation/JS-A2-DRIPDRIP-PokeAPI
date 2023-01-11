@@ -32,7 +32,6 @@ for (let i = 0; i < pokemons.length; i++) {
     // drag and drop
     pokemonImg.draggable = true;
     pokemonImg.addEventListener('dragstart', (event) => {
-        console.log(pokemons[i].id)
         event.dataTransfer.setData("text", pokemons[i].id);
     });
     
@@ -59,19 +58,20 @@ const addTeam = () => {
     const team = {
         id: nextId,
         node: teamLi,
-        members: Array.from({ length: 6 }).fill(-1) 
+        members: Array.from({ length: 6 }, () => ({ pokemonId: -1, skills: [] }))
     };
     nextId++;
+
+    
+    // afficher les pokémons et les stats sur deux colonnes
+    const leftDiv = document.createElement('div');
 
     const name = teamNameInput.value || ('Équipe n°' + team.id);
     teamNameInput.value = "";
     
     const teamName = document.createElement('h2');
     teamName.innerText = name;
-    teamLi.appendChild(teamName);
-
-    // afficher les pokémons et les stats sur deux colonnes
-    const div = document.createElement("div");
+    leftDiv.appendChild(teamName);
 
     const membersUl = document.createElement('ul');
     membersUl.classList.add("team-members")
@@ -83,18 +83,23 @@ const addTeam = () => {
         memberImg.addEventListener("drop", (e) => addPokemon(team.id, i, e.dataTransfer.getData("text")))
         membersUl.appendChild(memberImg);
     }
-    div.appendChild(membersUl);
-
-    const statsDiv = document.createElement("div");
-    statsDiv.innerHTML = "Ici seront affichées les statistiques";
-    div.appendChild(statsDiv);
-
-    teamLi.appendChild(div);
+    leftDiv.appendChild(membersUl);
 
     const deleteButton = document.createElement("button");
     deleteButton.innerHTML = 'Supprimer';
     deleteButton.addEventListener("click", deleteTeam(team.id));
-    teamLi.appendChild(deleteButton);
+    leftDiv.appendChild(deleteButton);
+
+    teamLi.appendChild(leftDiv);
+
+    const skillsDiv = document.createElement("div");
+    const h3 = document.createElement("h3");
+    h3.innerText = "Talents";
+    skillsDiv.appendChild(h3);
+    const ul = document.createElement("ul");
+    ul.classList.add("skills");
+    skillsDiv.appendChild(ul);
+    teamLi.appendChild(skillsDiv);
     
     teamsUl.appendChild(teamLi);
     teams.push(team);
@@ -119,8 +124,24 @@ const deleteTeam = (id) => () => {
 
 function addPokemon(teamId, memberId, pokemonId) {
     const team = teams.find(t => t.id === teamId);
-    team.members[memberId] = pokemonId;
+    team.members[memberId].pokemonId = pokemonId;
     team.node.getElementsByClassName(memberId).item(0).src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
+
+    fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonId)
+        .then(res => res.json())
+        .then(pokemon => team.members[memberId].skills = pokemon.moves.map(m => m.move.name))
+        .then(() => displayTeamSkills(teamId));
+}
+
+function displayTeamSkills(teamId) {
+    const team = teams.find(t => t.id === teamId);
+    const ul = team.node.getElementsByClassName("skills").item(0);
+    ul.innerHTML = "";
+    for (const skill of new Set(team.members.flatMap(m => m.skills.slice(0, 3)))) {
+        const li = document.createElement('li');
+        li.innerText = skill;
+        ul.appendChild(li);
+    }
 }
 
 /** 
@@ -128,5 +149,12 @@ function addPokemon(teamId, memberId, pokemonId) {
 * @type {object}
 * @property {number} id
 * @property {HTMLLIElement} node
-* @property {number[]} members 
+* @property {TeamMember[]} members 
+*/
+
+/** 
+* @typedef TeamMember
+* @type {object}
+* @property {number} pokemonId
+* @property {string[]} skills
 */
