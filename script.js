@@ -50,6 +50,8 @@ const teams = [];
 let nextId = 1;
 
 const addTeam = () => {
+    if (teams.length === 6) return;
+
     const teamLi = document.createElement('li');
     teamLi.classList.add("team");
     
@@ -96,6 +98,11 @@ const addTeam = () => {
     
     teamsUl.appendChild(teamLi);
     teams.push(team);
+
+    if (teams.length === 6) {
+        addTeamButton.disabled = true;
+        teamNameInput.disabled = true;
+    }
 };
 
 // fonction qui retourne un listener/callback
@@ -103,6 +110,11 @@ const deleteTeam = (id) => () => {
     const index = teams.findIndex(t => t.id === id);
     const [team] = teams.splice(index, 1);
     team.node.remove();
+
+    if (teams.length < 6) {
+        addTeamButton.disabled = false;
+        teamNameInput.disabled = false;
+    }
 };
 
 function addPokemon(teamId, memberId, pokemonId) {
