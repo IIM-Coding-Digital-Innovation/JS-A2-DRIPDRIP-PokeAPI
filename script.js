@@ -1,35 +1,30 @@
-const pokemons = [
-    {name: "Pikachu", type: "électrique", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"},
-    {name: "Salamèche", type: "feux", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"},
-    {name: "Carapuce", type: "eaux", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"},
-    {name: "Bulbizarre", type: "herbe", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"},
-    {name: "Rondoudou", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png"}
-  ];
-  
-  const pokemonContainer = document.getElementById("pokemon-container");
-  
-  for (let i = 0; i < pokemons.length; i++) {
-    let pokemonDiv = document.createElement("div");
-    pokemonDiv.style.backgroundColor = '#919492';
-    pokemonDiv.style.width = '10rem';
-    pokemonDiv.style.grid = 'flex';
-    pokemonDiv.style.justifySelf = 'center';
-    pokemonDiv.style.textAlign = 'center';
-    pokemonDiv.style.margin = '1rem';
-    pokemonDiv.style.border = '0.25rem solid';
-    pokemonDiv.style.borderRadius = '1rem';
-    pokemonDiv.style.boxShadow = '10px 5px 5px gray';
-    let pokemonName = document.createElement("p");
-    let pokemonImg = document.createElement("img");
-    let pokemonType = document.createElement("p");
-  
-    pokemonName.innerHTML = pokemons[i].name;
-    pokemonImg.src = pokemons[i].image;
-    pokemonType.innerHTML = pokemons[i].type;
-  
-    pokemonDiv.appendChild(pokemonName);
-    pokemonDiv.appendChild(pokemonImg);
-    pokemonDiv.appendChild(pokemonType);
-    pokemonContainer.appendChild(pokemonDiv);
-  }
-  
+let currentUrl;
+
+fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
+    .then(response => response.json())
+    .then(data => {
+      const pokemonList = document.querySelector('.pokemon-list');
+      data.results.forEach(pokemon => {
+        fetch(pokemon.url)
+            .then(response => response.json())
+            .then(pokemonData => {
+              const listItem = document.createElement('li');
+              const img = document.createElement("img");
+              currentUrl = pokemonData.sprites.front_default;
+              img.src = currentUrl;
+              img.id = pokemonData.name;
+              listItem.appendChild(img);
+              listItem.appendChild(document.createTextNode(pokemonData.name));
+
+              const shinyBtn = document.createElement("button");
+              shinyBtn.innerHTML = "shiny";
+              shinyBtn.addEventListener("click", () => {
+                currentUrl = currentUrl === pokemonData.sprites.front_default ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default;
+                img.src = currentUrl;
+              });
+              listItem.appendChild(shinyBtn);
+
+              pokemonList.appendChild(listItem);
+            });
+      });
+    });
