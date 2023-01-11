@@ -5,10 +5,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" >
-    <title>Document</title>
+    <title>PokeDex</title>
 </head>
 <body>
-    <div id="pokemon-container" class="affichage"></div>
+    
+    <main>
+        <div>
+            <div>
+                <label>Filtrer par génération :</label>
+                <select id="generation-filter">
+                    <option value="All">Toutes</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+            
+            <div>
+                <label>Filtrer par type :</label>
+                <select id="type-filter">
+                    <option value="All">Tous</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Fire">Feu</option>
+                    <option value="Water">Eau</option>
+                    <option value="Electric">Electrique</option>
+                    <option value="Grass">Plante</option>
+                    <option value="Ice">Glace</option>
+                    <option value="Fighting">Combat</option>
+                    <option value="Poison">Poison</option>
+                    <option value="Ground">Sol</option>
+                    <option value="Flying">Vol</option>
+                    <option value="Psychic">Psy</option>
+                    <option value="Bug">Insecte</option>
+                    <option value="Rock">Roche</option>
+                    <option value="Ghost">Spectre</option>
+                    <option value="Dragon">Dragon</option>
+                    <option value="Dark">Ténèbres</option>
+                    <option value="Steel">Acier</option>
+                    <option value="Fairy">Fée</option>
+                </select>
+            </div>
+            
+            <div>
+                <label>Filtrer par statistique moyenne :</label>
+                <select id="average-stat-filter">
+                    <option value="All">Toutes</option>
+                    <option value="500">500</option>
+                    <option value="550">550</option>
+                    <option value="600">600</option>
+                    <option value="650">650</option>
+                </select>
+            </div>
+            
+            <div>
+                <label>Filtrer par évolution :</label>
+                <select id="evolution-filter">
+                    <option value="All">Toutes</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            
+            <div id="pokemon-container" class="affichage">
+                <ul class="pokemon-list"></ul>
+            </div>
+        </div>
+
+        <div>
+            <h1>Ici seront affichées les équipes</h1>
+        </div>
+    </main>
+    
     <script src="script.js"></script>
 </body>
 </html>

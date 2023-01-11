@@ -1,3 +1,16 @@
+/* Séparer la page en deux */
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+main>div {
+    overflow: scroll;
+}
+
 .affichage{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
