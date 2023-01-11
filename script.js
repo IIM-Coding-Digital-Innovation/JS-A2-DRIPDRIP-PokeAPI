@@ -37,25 +37,41 @@ const teamsUl = document.getElementById("teams");
 const addTeamButton = document.getElementById("add-team");
 /** @type {Team[]} */
 const teams = [];
+let nextId = 1;
 
 addTeamButton.addEventListener("click", () => {
+    const teamLi = document.createElement('li');
+    
     /** @type {Team} */
     const team = {
-        id: teams.length
+        id: nextId,
+        node: teamLi,
     };
-    
-    const teamLi = document.createElement('li');
+    nextId++;
     
     const teamName = document.createElement('h2');
     teamName.innerText = 'Équipe n°' + team.id;
     teamLi.appendChild(teamName);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.innerHTML = 'Supprimer';
+    deleteButton.addEventListener("click", deleteTeam(team.id));
+    teamLi.appendChild(deleteButton);
     
     teamsUl.appendChild(teamLi);
     teams.push(team);
 });
 
+// fonction qui retourne un listener/callback
+const deleteTeam = (id) => () => {
+    const index = teams.findIndex(t => t.id === id);
+    const [team] = teams.splice(index, 1);
+    team.node.remove();
+};
+
 /** 
 * @typedef Team
 * @type {object}
 * @property {number} id
+* @property {HTMLLIElement} node
 */
