@@ -23,11 +23,16 @@ main>div {
     padding: 0;
 }
 
+.team>div {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 20px;
+}
+
 .team-members {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    width: min-content;
     gap: 2px;
     padding: 0;
     margin-bottom: 20px;

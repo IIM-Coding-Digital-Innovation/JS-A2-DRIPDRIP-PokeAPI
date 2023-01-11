@@ -51,6 +51,7 @@ let nextId = 1;
 
 const addTeam = () => {
     const teamLi = document.createElement('li');
+    teamLi.classList.add("team");
     
     /** @type {Team} */
     const team = {
@@ -67,6 +68,9 @@ const addTeam = () => {
     teamName.innerText = name;
     teamLi.appendChild(teamName);
 
+    // afficher les pokémons et les stats sur deux colonnes
+    const div = document.createElement("div");
+
     const membersUl = document.createElement('ul');
     membersUl.classList.add("team-members")
     for (let i = 0; i < 6; i++) {
@@ -76,7 +80,13 @@ const addTeam = () => {
         memberImg.addEventListener("drop", (e) => addPokemon(team.id, i, e.dataTransfer.getData("text")))
         membersUl.appendChild(memberImg);
     }
-    teamLi.appendChild(membersUl);
+    div.appendChild(membersUl);
+
+    const statsDiv = document.createElement("div");
+    statsDiv.innerHTML = "Ici seront affichées les statistiques";
+    div.appendChild(statsDiv);
+
+    teamLi.appendChild(div);
 
     const deleteButton = document.createElement("button");
     deleteButton.innerHTML = 'Supprimer';
