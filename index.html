@@ -75,7 +75,10 @@
         </div>
 
         <div>
-            <button id="add-team">Ajouter une équipe</button>
+            <form action="javascript:addTeam()">
+                <input type="text" id="new-team-name" placeholder="Nom de l'équipe">
+                <button type="submit">Ajouter une équipe</button>
+            </form>
             <ul id="teams"></ul>
         </div>
     </main>

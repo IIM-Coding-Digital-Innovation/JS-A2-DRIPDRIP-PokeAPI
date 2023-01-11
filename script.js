@@ -35,11 +35,12 @@ for (let i = 0; i < pokemons.length; i++) {
 
 const teamsUl = document.getElementById("teams");
 const addTeamButton = document.getElementById("add-team");
+const teamNameInput = document.getElementById("new-team-name");
 /** @type {Team[]} */
 const teams = [];
 let nextId = 1;
 
-addTeamButton.addEventListener("click", () => {
+const addTeam = () => {
     const teamLi = document.createElement('li');
     
     /** @type {Team} */
@@ -48,9 +49,12 @@ addTeamButton.addEventListener("click", () => {
         node: teamLi,
     };
     nextId++;
+
+    const name = teamNameInput.value || ('Équipe n°' + team.id);
+    teamNameInput.value = "";
     
     const teamName = document.createElement('h2');
-    teamName.innerText = 'Équipe n°' + team.id;
+    teamName.innerText = name;
     teamLi.appendChild(teamName);
 
     const deleteButton = document.createElement("button");
@@ -60,7 +64,7 @@ addTeamButton.addEventListener("click", () => {
     
     teamsUl.appendChild(teamLi);
     teams.push(team);
-});
+};
 
 // fonction qui retourne un listener/callback
 const deleteTeam = (id) => () => {
