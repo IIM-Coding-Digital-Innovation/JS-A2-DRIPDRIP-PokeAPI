@@ -3,7 +3,9 @@ const pokemons = [
     {name: "Salamèche", type: "feux", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"},
     {name: "Carapuce", type: "eaux", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"},
     {name: "Bulbizarre", type: "herbe", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"},
-    {name: "Rondoudou", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png"}
+    {name: "Rondoudou", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png"},
+    {name: "Chenipan", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png"},
+    {name: "Aspicot", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png"},
 ];
 
 const pokemonContainer = document.getElementById("pokemon-container");
@@ -47,6 +49,7 @@ const addTeam = () => {
     const team = {
         id: nextId,
         node: teamLi,
+        members: Array.from({ length: 6 }).fill(-1) 
     };
     nextId++;
 
@@ -56,6 +59,14 @@ const addTeam = () => {
     const teamName = document.createElement('h2');
     teamName.innerText = name;
     teamLi.appendChild(teamName);
+
+    const membersUl = document.createElement('ul');
+    membersUl.classList.add("team-members")
+    for (let i = 0; i < 6; i++) {
+        const memberImg = document.createElement('img');
+        membersUl.appendChild(memberImg);
+    }
+    teamLi.appendChild(membersUl);
 
     const deleteButton = document.createElement("button");
     deleteButton.innerHTML = 'Supprimer';
@@ -78,4 +89,5 @@ const deleteTeam = (id) => () => {
 * @type {object}
 * @property {number} id
 * @property {HTMLLIElement} node
+* @property {number[]} members 
 */
