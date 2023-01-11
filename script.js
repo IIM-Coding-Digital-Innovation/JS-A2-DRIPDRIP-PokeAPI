@@ -76,6 +76,7 @@ const addTeam = () => {
     for (let i = 0; i < 6; i++) {
         const memberImg = document.createElement('img');
         memberImg.classList.add(i);
+        memberImg.addEventListener("dragstart", (e) => e.preventDefault());
         memberImg.addEventListener("dragover", (e) => e.preventDefault())
         memberImg.addEventListener("drop", (e) => addPokemon(team.id, i, e.dataTransfer.getData("text")))
         membersUl.appendChild(memberImg);
