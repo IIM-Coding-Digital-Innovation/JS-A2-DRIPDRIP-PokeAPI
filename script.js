@@ -4,11 +4,11 @@ const pokemons = [
     {name: "Carapuce", type: "eaux", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"},
     {name: "Bulbizarre", type: "herbe", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"},
     {name: "Rondoudou", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png"}
-  ];
-  
-  const pokemonContainer = document.getElementById("pokemon-container");
-  
-  for (let i = 0; i < pokemons.length; i++) {
+];
+
+const pokemonContainer = document.getElementById("pokemon-container");
+
+for (let i = 0; i < pokemons.length; i++) {
     let pokemonDiv = document.createElement("div");
     pokemonDiv.style.backgroundColor = '#919492';
     pokemonDiv.style.width = '10rem';
@@ -22,14 +22,40 @@ const pokemons = [
     let pokemonName = document.createElement("p");
     let pokemonImg = document.createElement("img");
     let pokemonType = document.createElement("p");
-  
+    
     pokemonName.innerHTML = pokemons[i].name;
     pokemonImg.src = pokemons[i].image;
     pokemonType.innerHTML = pokemons[i].type;
-  
+    
     pokemonDiv.appendChild(pokemonName);
     pokemonDiv.appendChild(pokemonImg);
     pokemonDiv.appendChild(pokemonType);
     pokemonContainer.appendChild(pokemonDiv);
-  }
-  
+}
+
+const teamsUl = document.getElementById("teams");
+const addTeamButton = document.getElementById("add-team");
+/** @type {Team[]} */
+const teams = [];
+
+addTeamButton.addEventListener("click", () => {
+    /** @type {Team} */
+    const team = {
+        id: teams.length
+    };
+    
+    const teamLi = document.createElement('li');
+    
+    const teamName = document.createElement('h2');
+    teamName.innerText = 'Équipe n°' + team.id;
+    teamLi.appendChild(teamName);
+    
+    teamsUl.appendChild(teamLi);
+    teams.push(team);
+});
+
+/** 
+* @typedef Team
+* @type {object}
+* @property {number} id
+*/
