@@ -1,11 +1,11 @@
 const pokemons = [
-    {name: "Pikachu", type: "électrique", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"},
-    {name: "Salamèche", type: "feux", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"},
-    {name: "Carapuce", type: "eaux", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"},
-    {name: "Bulbizarre", type: "herbe", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"},
-    {name: "Rondoudou", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png"},
-    {name: "Chenipan", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png"},
-    {name: "Aspicot", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png"},
+    {name: "Pikachu", type: "électrique", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png", id: 25},
+    {name: "Salamèche", type: "feux", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png", id: 4},
+    {name: "Carapuce", type: "eaux", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png", id: 7},
+    {name: "Bulbizarre", type: "herbe", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", id: 1},
+    {name: "Rondoudou", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png", id: 39},
+    {name: "Chenipan", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png", id: 10},
+    {name: "Aspicot", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png", id: 13},
 ];
 
 const pokemonContainer = document.getElementById("pokemon-container");
@@ -28,6 +28,13 @@ for (let i = 0; i < pokemons.length; i++) {
     pokemonName.innerHTML = pokemons[i].name;
     pokemonImg.src = pokemons[i].image;
     pokemonType.innerHTML = pokemons[i].type;
+
+    // drag and drop
+    pokemonImg.draggable = true;
+    pokemonImg.addEventListener('dragstart', (event) => {
+        console.log(pokemons[i].id)
+        event.dataTransfer.setData("text", pokemons[i].id);
+    });
     
     pokemonDiv.appendChild(pokemonName);
     pokemonDiv.appendChild(pokemonImg);
@@ -64,6 +71,9 @@ const addTeam = () => {
     membersUl.classList.add("team-members")
     for (let i = 0; i < 6; i++) {
         const memberImg = document.createElement('img');
+        memberImg.classList.add(i);
+        memberImg.addEventListener("dragover", (e) => e.preventDefault())
+        memberImg.addEventListener("drop", (e) => addPokemon(team.id, i, e.dataTransfer.getData("text")))
         membersUl.appendChild(memberImg);
     }
     teamLi.appendChild(membersUl);
@@ -83,6 +93,12 @@ const deleteTeam = (id) => () => {
     const [team] = teams.splice(index, 1);
     team.node.remove();
 };
+
+function addPokemon(teamId, memberId, pokemonId) {
+    const team = teams.find(t => t.id === teamId);
+    team.members[memberId] = pokemonId;
+    team.node.getElementsByClassName(memberId).item(0).src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
+}
 
 /** 
 * @typedef Team

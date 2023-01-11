@@ -38,3 +38,11 @@ main>div {
     height: 50px;
     background-color: #555;
 }
+
+/** drag and drop*/
+[draggable="true"] {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
