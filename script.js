@@ -38,30 +38,39 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
         }
 
         function displayPokemon(pokemonData) {
-            pokemonList.innerHTML = "";
-            pokemonData.forEach(pokemon => {
-                fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon.name +  '?limit=10')
-                    .then(response => response.json())
-                    .then(pokemonData => {
-                        const listItem = document.createElement('li');
-                        const img = document.createElement("img");
-                        currentUrl = pokemonData.sprites.front_default;
-                        img.src = currentUrl;
-                        img.id = pokemonData.name;
-                        listItem.appendChild(img);
-                        listItem.appendChild(document.createTextNode(pokemonData.name));
+        pokemonList.innerHTML = "";
+        pokemonData.forEach(pokemon => {
+        fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon.name +  '?limit=10')
+            .then(response => response.json())
+            .then(pokemonData => {
+                const listItem = document.createElement('li');
+                const img = document.createElement("img");
+                currentUrl = pokemonData.sprites.front_default;
+                img.src = currentUrl;
+                img.id = pokemonData.name;
+                listItem.appendChild(img);
+                listItem.appendChild(document.createTextNode(pokemonData.name));
 
-                        const shinyBtn = document.createElement("button");
-                        shinyBtn.innerHTML = "shiny";
-                        shinyBtn.addEventListener("click", () => {
-                            currentUrl = currentUrl === pokemonData.sprites.front_default ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default;
-                            img.src = currentUrl;
-                        });
-                        listItem.appendChild(shinyBtn);
-                        pokemonList.appendChild(listItem);
-                    });
+                const shinyBtn = document.createElement("button");
+                shinyBtn.innerHTML = "shiny";
+                shinyBtn.addEventListener("click", () => {
+                    currentUrl = currentUrl === pokemonData.sprites.front_default ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default;
+                    img.src = currentUrl;
+                });
+                const gen = document.createElement("p");
+                gen.innerHTML = "gen : " + pokemonData.past_generation;
+                const type = document.createElement("p");
+                type.innerHTML = "type : " + pokemonData.types.map(type => type.type.name).join(" / ");
+
+                listItem.appendChild(gen);
+                listItem.appendChild(type);
+                listItem.appendChild(shinyBtn);
+                pokemonList.appendChild(listItem);
             });
-        }
+    });
+}
+
+
 
         const generationFilter = document.querySelector("#generation-filter");
         const typeFilter = document.querySelector("#type-filter");
