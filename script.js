@@ -2,21 +2,13 @@ let allPokemon = [];
 let filteredPokemon = [];
 let currentUrl;
 
-fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
+fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
     .then(response => response.json())
     .then(data => {
         allPokemon = data.results;
         console.log(allPokemon)
         const pokemonList = document.querySelector('.pokemon-list');
         displayPokemon(allPokemon);
-
-        allPokemon.forEach(pokemon => {
-            fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon.name)
-                .then(response => response.json())
-                .then(pokemon => {
-                    console.log(pokemon)
-                })
-        })
 
         function filterByCriteria(generation, type, averageStat, evolution) {
             filteredPokemon = allPokemon.filter(pokemon => {
@@ -40,7 +32,7 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
         function displayPokemon(pokemonData) {
             pokemonList.innerHTML = "";
             pokemonData.forEach(pokemon => {
-                fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon.name +  '?limit=10')
+                fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon.name)
                     .then(response => response.json())
                     .then(pokemonData => {
                         const listItem = document.createElement('li');
@@ -59,12 +51,22 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
                         });
                         listItem.appendChild(shinyBtn);
                         pokemonList.appendChild(listItem);
+
+                        pokemonData["types"].forEach(type => {
+                            console.log(type);
+                            const typeFilter = document.querySelector("#type-filter");
+                            typeFilter.addEventListener("change", event => {
+                                filteredPokemon = filterByCriteria(type.name, event.target.value, averageStatFilter.value, evolutionFilter.value);
+                                displayPokemon(filteredPokemon);
+                            });
+                        })
+
                     });
             });
         }
 
         const generationFilter = document.querySelector("#generation-filter");
-        const typeFilter = document.querySelector("#type-filter");
+
         const averageStatFilter = document.querySelector("#average-stat-filter");
         const evolutionFilter = document.querySelector("#evolution-filter");
 
@@ -72,10 +74,7 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
             filteredPokemon = filterByCriteria(event.target.value, typeFilter.value, averageStatFilter.value, evolutionFilter.value);
             displayPokemon(filteredPokemon);
         });
-        typeFilter.addEventListener("change", event => {
-            filteredPokemon = filterByCriteria(typeFilter.value, event.target.value, averageStatFilter.value, evolutionFilter.value);
-            displayPokemon(filteredPokemon);
-        });
+
         averageStatFilter.addEventListener("change", event => {
             filteredPokemon = filterByCriteria(generationFilter.value, typeFilter.value, event.target.value, evolutionFilter.value);
             displayPokemon(filteredPokemon);
@@ -84,5 +83,8 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
             filteredPokemon = filterByCriteria(generationFilter.value, typeFilter.value, averageStatFilter.value, event.target.value);
             displayPokemon(filteredPokemon);
         });
+
+
+
     });
 
