@@ -8,10 +8,14 @@ const pokemons = [
     {name: "Aspicot", type: "Normal", image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png", id: 13},
 ];
 
+// Récupère l'élément HTML avec l'id "pokemon-container" pour y ajouter les informations des Pokémons
 const pokemonContainer = document.getElementById("pokemon-container");
 
+// Pour chaque Pokémon dans le tableau "pokemons", créer une "div" pour chaque Pokémon
 for (let i = 0; i < pokemons.length; i++) {
+      // Créer la div qui contiendra les informations du Pokémon
     let pokemonDiv = document.createElement("div");
+        // Ajouter des styles à la div pour une présentation agréable
     pokemonDiv.style.backgroundColor = '#919492';
     pokemonDiv.style.width = '10rem';
     pokemonDiv.style.grid = 'flex';
@@ -21,10 +25,13 @@ for (let i = 0; i < pokemons.length; i++) {
     pokemonDiv.style.border = '0.25rem solid';
     pokemonDiv.style.borderRadius = '1rem';
     pokemonDiv.style.boxShadow = '10px 5px 5px gray';
+
+        // Créer les éléments pour le nom, l'image et le type du Pokémon
     let pokemonName = document.createElement("p");
     let pokemonImg = document.createElement("img");
     let pokemonType = document.createElement("p");
-    
+
+        // Ajouter les valeurs des propriétés du Pokémon aux éléments créés
     pokemonName.innerHTML = pokemons[i].name;
     pokemonImg.src = pokemons[i].image;
     pokemonType.innerHTML = pokemons[i].type;
@@ -34,7 +41,7 @@ for (let i = 0; i < pokemons.length; i++) {
     pokemonImg.addEventListener('dragstart', (event) => {
         event.dataTransfer.setData("text", pokemons[i].id);
     });
-    
+    // Ajouter les éléments créés pour le nom, l'image et le type du Pokémon à la div du Pokémon
     pokemonDiv.appendChild(pokemonName);
     pokemonDiv.appendChild(pokemonImg);
     pokemonDiv.appendChild(pokemonType);
@@ -49,11 +56,14 @@ const teams = [];
 let nextId = 1;
 
 const addTeam = () => {
+ // Si le nombre d'équipes est égal à 6, ne pas en ajouter de nouvelles
     if (teams.length === 6) return;
 
+    // Créer un élément 'li' pour afficher l'équipe
     const teamLi = document.createElement('li');
     teamLi.classList.add("team");
     
+    // Créer un objet pour stocker les propriétés de l'équipe
     /** @type {Team} */
     const team = {
         id: nextId,
@@ -66,15 +76,26 @@ const addTeam = () => {
     // afficher les pokémons et les stats sur deux colonnes
     const leftDiv = document.createElement('div');
 
+    // Récupérer le nom de l'équipe entré dans le champ de saisie ou en créer un par défaut
     const name = teamNameInput.value || ('Équipe n°' + team.id);
     teamNameInput.value = "";
     
+    //Créer un element pour afficher le nom de l'équipe
+
     const teamName = document.createElement('h2');
     teamName.innerText = name;
+
+    // Ajouter le nom de l'équipe à la structure créée
     leftDiv.appendChild(teamName);
 
+    // Crée une liste pour contenir les membres de l'équipe
+
     const membersUl = document.createElement('ul');
+
+    // Ajoute une classe pour le style
     membersUl.classList.add("team-members")
+
+    // Boucle pour créer 6 images pour les membres de l'équipe
     for (let i = 0; i < 6; i++) {
         const memberImg = document.createElement('img');
         memberImg.classList.add(i);
@@ -85,13 +106,17 @@ const addTeam = () => {
     }
     leftDiv.appendChild(membersUl);
 
+    // Crée un bouton pour supprimer l'équipe
     const deleteButton = document.createElement("button");
     deleteButton.innerHTML = 'Supprimer';
+    // Ajoute un écouteur pour supprimer l'équipe lorsque cliqué
     deleteButton.addEventListener("click", deleteTeam(team.id));
     leftDiv.appendChild(deleteButton);
 
+    // Ajouter la structure à l'élément 'li' qui affiche l'équipe
     teamLi.appendChild(leftDiv);
 
+    // Crée un conteneur pour les compétences de l'équipe
     const skillsDiv = document.createElement("div");
     const h3 = document.createElement("h3");
     h3.innerText = "Talents";
@@ -104,6 +129,7 @@ const addTeam = () => {
     teamsUl.appendChild(teamLi);
     teams.push(team);
 
+    // Si le nombre d'équipes est égal à 6, bloque l'ajout d'équipe
     if (teams.length === 6) {
         addTeamButton.disabled = true;
         teamNameInput.disabled = true;
