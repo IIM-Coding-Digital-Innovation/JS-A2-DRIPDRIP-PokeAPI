@@ -59,6 +59,7 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
                         });
                         listItem.appendChild(shinyBtn);
                         pokemonList.appendChild(listItem);
+
                     });
             });
         }
