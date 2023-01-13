@@ -285,7 +285,13 @@ function filterGene() {
                                         nameElement.style.color = "";
                                     }, 1000);
                                 }
-
+                                if(colorData.name === "white") {
+                                    nameElement.style.color = "black"
+                                    setTimeout(() => {
+                                        pokemonContainer.style.background = "";
+                                        nameElement.style.color = "";
+                                    }, 1000);
+                                }
                             } )
                         })
 
