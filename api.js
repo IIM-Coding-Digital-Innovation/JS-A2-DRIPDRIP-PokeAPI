@@ -87,6 +87,87 @@ function filterPokemon() {
     }
   }
 
+
+  function filterGene() {
+	// Récupérer la valeur sélectionnée
+	const selectedGeneration = document.getElementById("generation").value;
+	let pokemonList = [];
+	if (selectedGeneration === 'all') {
+		// Utiliser l'API PokeAPI pour récupérer les informations des 10 premiers pokemons
+		fetch(`https://pokeapi.co/api/v2/pokemon?limit=10`).then(response => response.json()).then(data => {
+			const pokemons = data.results;
+			pokemonList = pokemons.map(pokemon => {
+				return fetch(pokemon.url).then(response => response.json()).then(pokemonData => {
+					// Créer la div conteneur pour chaque élément <li>
+					const pokemonContainer = document.createElement('div');
+					pokemonContainer.classList.add('pokemon-card');
+					// Créer l'élément <li> pour chaque pokemon
+					const pokemonElement = document.createElement('li');
+					const nameElement = document.createElement('p');
+					const imageElement = document.createElement('img');
+					nameElement.textContent = pokemonData.name;
+					imageElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`;
+					imageElement.alt = pokemonData.name;
+					pokemonElement.appendChild(nameElement);
+					pokemonElement.appendChild(imageElement);
+					// Ajouter l'élément <li> à la div conteneur
+					pokemonContainer.appendChild(pokemonElement);
+					return pokemonContainer;
+				});
+			});
+			// Attendre que toutes les requêtes soient terminées
+			Promise.all(pokemonList).then(pokemonContainers => {
+				// Ajouter la liste des pokemons à l'élement "pokemon-list"
+				const pokemonListElement = document.getElementById('pokemon-list');
+				// Supprimer les enfants actuels
+				while (pokemonListElement.firstChild) {
+					pokemonListElement.removeChild(pokemonListElement.firstChild);
+				}
+				pokemonContainers.forEach(pokemonContainer => {
+					pokemonListElement.appendChild(pokemonContainer);
+				});
+			});
+		});
+	} else {
+		// Utiliser l'API PokeAPI pour récupérer les pokemons de la génération sélectionnée
+		fetch(`https://pokeapi.co/api/v2/generation/${selectedGeneration}`).then(response => response.json()).then(data => {
+			const pokemons = data.pokemon_species;
+			pokemonList = pokemons.map(pokemon => {
+				return fetch(pokemon.url).then(response => response.json()).then(pokemonData => {
+					// Créer la div conteneur pour chaque élément <li>
+					const pokemonContainer = document.createElement('div');
+					pokemonContainer.classList.add('pokemon-card');
+					// Créer l'élément <li> pour chaque pokemon
+					const pokemonElement = document.createElement('li');
+					const nameElement = document.createElement('p');
+					const imageElement = document.createElement('img');
+					nameElement.textContent = pokemonData.name;
+					imageElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`;
+					imageElement.alt = pokemonData.name;
+					pokemonElement.appendChild(nameElement);
+					pokemonElement.appendChild(imageElement);
+					// Ajouter l'élément <li> à la div conteneur
+					pokemonContainer.appendChild(pokemonElement);
+					return pokemonContainer;
+				});
+			});
+			// Attendre que toutes les requêtes soient terminées
+			Promise.all(pokemonList).then(pokemonContainers => {
+				// Ajouter la liste des pokemons à l'élement "pokemon-list"
+				const pokemonListElement = document.getElementById('pokemon-list');
+				// Supprimer les enfants actuels
+				while (pokemonListElement.firstChild) {
+					pokemonListElement.removeChild(pokemonListElement.firstChild);
+				}
+				pokemonContainers.forEach(pokemonContainer => {
+					pokemonListElement.appendChild(pokemonContainer);
+				});
+			});
+		});
+	}
+}
+  
+
   window.onload = function() {
     filterPokemon();
 }
