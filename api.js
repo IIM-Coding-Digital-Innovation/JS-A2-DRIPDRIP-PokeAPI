@@ -25,6 +25,7 @@ function filterPokemon() {
                                         pokemonContainer.addEventListener('mouseover', (event) => {
                                             if (typeData.name === "fire") {
                                                 pokemonContainer.style.background = "orangered";
+                                                pokemonContainer.style.transition = "all .25s ease-in-out"
                                                 setTimeout(() => {
                                                     pokemonContainer.style.background = "";
                                                     nameElement.style.color = "";
@@ -32,6 +33,7 @@ function filterPokemon() {
                                             }
                                             if (typeData.name === "water") {
                                                 pokemonContainer.style.background = "blue";
+                                                pokemonContainer.style.transition = "all .25s ease-in-out"
                                                 nameElement.style.color = "white";
                                                 setTimeout(() => {
                                                     pokemonContainer.style.background = "";
@@ -40,6 +42,7 @@ function filterPokemon() {
                                             }
                                             if (typeData.name === "grass") {
                                                 pokemonContainer.style.background = "green";
+                                                pokemonContainer.style.transition = "all .25s ease-in-out"
                                                 nameElement.style.color = "white";
                                                 setTimeout(() => {
                                                     pokemonContainer.style.background = "";
@@ -48,6 +51,7 @@ function filterPokemon() {
                                             }
                                             if (typeData.name === "bug") {
                                                 pokemonContainer.style.background = "#bc6c25";
+                                                pokemonContainer.style.transition = "all .25s ease-in-out"
                                                 nameElement.style.color = "white";
                                                 setTimeout(() => {
                                                     pokemonContainer.style.background = "";
