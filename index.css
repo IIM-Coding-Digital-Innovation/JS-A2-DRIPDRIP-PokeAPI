@@ -1,0 +1,37 @@
+body {
+    background: url("background.JPG") no-repeat center fixed;
+    background-size: cover;
+   }
+
+   #pokemon-button {
+    /* Dimensions */
+    width: 200px;
+    height: 70px;
+  
+    /* Couleur de fond */
+    background-color: #f7da1a;
+  
+    /* Couleur de la police */
+    color: white;
+  
+    /* Style de bordure */
+    border: none;
+    border-radius: 10px;
+  
+    /* Style de police */
+    font-size: 18px;
+    font-weight: bold;
+  
+    /* Positionnement */
+    position: absolute;
+    top: 76%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    /* Effet au survol */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#pokemon-button:hover {
+    background-color: #ab8211;
+}

@@ -1,0 +1,128 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    background: url("background_home.jpg") no-repeat center fixed;
+    background-size: cover;
+    z-index: -1;
+
+}
+
+/* Séparer la page en deux */
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100vw;
+    height: 100vh;
+}
+
+main>div {
+    overflow-y: scroll;
+    padding: 20px;
+}
+
+.affichage{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    padding: 0;
+}
+
+.team {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 20px;
+}
+
+.team-members {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.team-members img {
+    width: 50px;
+    height: 50px;
+    background-color: #555;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: min-content;
+    max-height: 150px;
+}
+
+/** drag and drop*/
+[draggable="true"] {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.back {
+    /* Dimensions */
+    width: 200px;
+    height: 40px;
+  
+    /* Couleur de fond */
+    background-color: #f7da1a;
+  
+    /* Couleur de la police */
+    color: white;
+  
+    /* Style de bordure */
+    border: none;
+    border-radius: 10px;
+  
+    /* Style de police */
+    font-size: 18px;
+    font-weight: bold;
+  
+    /* Positionnement */
+    position: absolute;
+    top: 96%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+  
+    /* Effet au survol */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.back:hover {
+    background-color: #ab8211;
+}
+
+#tremble {
+    animation: none; /* désactiver l'animation par défaut */
+  }
+  
+  #tremble:hover {
+    animation: tremble 0.1s infinite; /* activer l'animation lorsque la souris passe sur l'élément */
+    animation-iteration-count: 1;
+    }
+  
+  @keyframes tremble {
+    0% {
+      transform: translate(1px, 1px);
+    }
+    10% {
+      transform: translate(-1px, -2px);
+    }
+    20% {
+      transform: translate(-3px, 0px);
+    }
+    30% {
+      transform: translate(3px, 2px);
+    }
+    /* etc */
+    100% {
+      transform: translate(1px, -1px);
+    }
+  }
+
+    
