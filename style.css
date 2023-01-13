@@ -30,7 +30,7 @@ body {
 
   .pokemon-card {
     position: relative;
-    ...
+    
   }
   
   .pokemon-card-image-container {
@@ -56,7 +56,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: white;
-    filter: blur(5px);
+    filter: blur(10px);
     z-index: -1;
   }
   

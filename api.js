@@ -1,4 +1,5 @@
 const numberOfPokemonsToDisplay = 10;
+let currentUrl;
 
 function filterPokemon() {
     // Récupérer la valeur sélectionnée
@@ -14,16 +15,71 @@ function filterPokemon() {
                     return fetch(pokemon.url)
                         .then(response => response.json())
                         .then(pokemonData => {
+                            console.log(pokemonData)
+                            pokemonData['types'].forEach(type => {
+                                console.log(type.type.url)
+                                fetch(type.type.url)
+                                    .then(res => res.json())
+                                    .then(typeData => {
+                                        console.log(typeData.name)
+                                        pokemonContainer.addEventListener('mouseover', (event) => {
+                                            if (typeData.name === "fire") {
+                                                pokemonContainer.style.background = "orangered";
+                                                pokemonContainer.style.transition = "all .25s ease-in-out"
+                                                setTimeout(() => {
+                                                    pokemonContainer.style.background = "";
+                                                    nameElement.style.color = "";
+                                                }, 1000);
+                                            }
+                                            if (typeData.name === "water") {
+                                                pokemonContainer.style.background = "blue";
+                                                pokemonContainer.style.transition = "all .25s ease-in-out"
+                                       
+                                                setTimeout(() => {
+                                                    pokemonContainer.style.background = "";
+                                                    nameElement.style.color = "";
+                                                }, 1000);
+                                            }
+                                            if (typeData.name === "grass") {
+                                                pokemonContainer.style.background = "green";
+                                                pokemonContainer.style.transition = "all .25s ease-in-out"
+                                            
+                                                setTimeout(() => {
+                                                    pokemonContainer.style.background = "";
+                                                    nameElement.style.color = "";
+                                                }, 1000);
+                                            }
+                                            if (typeData.name === "bug") {
+                                                pokemonContainer.style.background = "#bc6c25";
+                                                pokemonContainer.style.transition = "all .25s ease-in-out"
+                                                
+                                                setTimeout(() => {
+                                                    pokemonContainer.style.background = "";
+                                                    nameElement.style.color = "";
+                                                }, 1000);
+                                            }
+                                        });
+                                    })
+                            })
                             // Créer la div conteneur pour chaque élément <li>
                             const pokemonContainer = document.createElement('div');
                             pokemonContainer.classList.add('pokemon-card');
                             // Créer l'élément <li> pour chaque pokemon
                             const pokemonElement = document.createElement('li');
+                            pokemonElement.style.listStyle = "none"
                             const nameElement = document.createElement('p');
+                            nameElement.style.fontSize = "20px"
                             const imageElement = document.createElement('img');
                             const seeMoreButton = document.createElement('button');
+                            seeMoreButton.classList = "pokemon-button";
+                            const shinyBtn = document.createElement("button");
+                            shinyBtn.classList = "pokemon-button";
+                            shinyBtn.innerHTML = "shiny";
+                            shinyBtn.addEventListener("click", () => {
+                                currentUrl = currentUrl === pokemonData.sprites.front_default ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default;
+                                imageElement.src = currentUrl;
+                            });
                                 seeMoreButton.textContent = "Voir plus";
-                                seeMoreButton.classList = "pokemon-button";
                                 seeMoreButton.addEventListener('click', () => {
                                     document.location.href=`single.html?pokeId=${pokemonData.id}&pokeName=${pokemonData.name}&pokeImg=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png&pokeWeight=${pokemonData.weight}&pokeHeight=${pokemonData.height}`; 
                                 });
@@ -33,6 +89,7 @@ function filterPokemon() {
                             pokemonElement.appendChild(nameElement);
                             pokemonElement.appendChild(imageElement);
                             pokemonElement.appendChild(seeMoreButton);
+                            pokemonElement.appendChild(shinyBtn);
                             // Ajouter l'élément <li> à la div conteneur
                             pokemonContainer.appendChild(pokemonElement);
                             return pokemonContainer;
@@ -69,16 +126,24 @@ function filterPokemon() {
                                 const nameElement = document.createElement('p');
                                 const imageElement = document.createElement('img');
                                 const seeMoreButton = document.createElement('button');
+                                const shinyBtn = document.createElement("button");
+                                shinyBtn.innerHTML = "shiny";
+                                shinyBtn.addEventListener("click", () => {
+                                    currentUrl = currentUrl === pokemonData.sprites.front_default ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default;
+                                    imageElement.src = currentUrl;
+                                });
                                 seeMoreButton.textContent = "Voir plus";
                                 seeMoreButton.addEventListener('click', () => {
                                     document.location.href=`single.html?pokeId=${pokemonData.id}&pokeName=${pokemonData.name}&pokeImg=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png&pokeWeight=${pokemonData.weight}&pokeHeight=${pokemonData.height}`; 
                                 });
+
                                 nameElement.textContent = pokemonData.name;
                                 imageElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`;
                                 imageElement.alt = pokemonData.name;
                                 pokemonElement.appendChild(nameElement);
                                 pokemonElement.appendChild(imageElement);
                                 pokemonElement.appendChild(seeMoreButton);
+                                pokemonElement.appendChild(shinyBtn);
                                 // Ajouter l'élément <li> à la div conteneur
                                 pokemonContainer.appendChild(pokemonElement);
                                 return pokemonContainer;
@@ -119,6 +184,12 @@ function filterPokemon() {
 					const nameElement = document.createElement('p');
 					const imageElement = document.createElement('img');
                     const seeMoreButton = document.createElement('button');
+                    const shinyBtn = document.createElement("button");
+                    shinyBtn.innerHTML = "shiny";
+                    shinyBtn.addEventListener("click", () => {
+                        currentUrl = currentUrl === pokemonData.sprites.front_default ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default;
+                        imageElement.src = currentUrl;
+                    });
                                 seeMoreButton.textContent = "Voir plus";
                                 seeMoreButton.addEventListener('click', () => {
                                     document.location.href=`single.html?pokeId=${pokemonData.id}&pokeName=${pokemonData.name}&pokeImg=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png&pokeWeight=${pokemonData.weight}&pokeHeight=${pokemonData.height}`; 
@@ -129,6 +200,7 @@ function filterPokemon() {
 					pokemonElement.appendChild(nameElement);
 					pokemonElement.appendChild(imageElement);
                     pokemonElement.appendChild(seeMoreButton);
+                    pokemonElement.appendChild(shinyBtn);
 					// Ajouter l'élément <li> à la div conteneur
 					pokemonContainer.appendChild(pokemonElement);
 					return pokemonContainer;
@@ -195,4 +267,4 @@ function filterPokemon() {
   window.onload = function() {
     filterPokemon();
 }
-  
+
