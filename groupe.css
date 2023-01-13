@@ -103,7 +103,6 @@ main>div {
   
   #tremble:hover {
     animation: tremble 0.1s infinite; /* activer l'animation lorsque la souris passe sur l'élément */
-    animation-iteration-count: 1;
     }
   
   @keyframes tremble {
@@ -125,4 +124,35 @@ main>div {
     }
   }
 
-    
+    .tremble {
+        width: 200px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        background-color: #00bfff;
+        color: #fff;
+        font-size: 20px;
+        transition: transform 0.2s;
+      }
+      
+      .tremble:hover {
+        animation: tremble 1s;
+      }
+      
+      @keyframes tremble {
+        10%, 90% {
+          transform: translate3d(-1px, 0, 0);
+        }
+        
+        20%, 80% {
+          transform: translate3d(2px, 0, 0);
+        }
+      
+        30%, 50%, 70% {
+          transform: translate3d(-4px, 0, 0);
+        }
+      
+        40%, 60% {
+          transform: translate3d(4px, 0, 0);
+        }
+      }

@@ -18,6 +18,9 @@ for (let i = 0; i < pokemons.length; i++) {
     pokemonDiv.setAttribute('class','myCanvas');
     pokemonDiv.setAttribute('id','tremble');
 
+
+    
+
         // Ajouter des styles à la div pour une présentation agréable
     pokemonDiv.style.backgroundColor = '#919492';
     pokemonDiv.style.width = '10rem';
