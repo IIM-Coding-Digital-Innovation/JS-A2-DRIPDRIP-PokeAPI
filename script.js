@@ -10,25 +10,6 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
         const pokemonList = document.querySelector('.pokemon-list');
         displayPokemon(allPokemon);
 
-        function filterByCriteria(generation, type, averageStat, evolution) {
-            filteredPokemon = allPokemon.filter(pokemon => {
-                if (generation !== "All" && pokemon.generation !== generation) {
-                    return false;
-                }
-                if (type !== "All" && (!pokemon.type || !pokemon.types.includes(type))) {
-                    return false;
-                }
-                if (averageStat !== "All" && pokemon.average_stat !== averageStat) {
-                    return false;
-                }
-                if (evolution !== "All" && pokemon.evolution !== evolution) {
-                    return false;
-                }
-                return true;
-            });
-            return filteredPokemon;
-        }
-
         function displayPokemon(pokemonData) {
             pokemonList.innerHTML = "";
             pokemonData.forEach(pokemon => {
@@ -43,48 +24,11 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
                         listItem.appendChild(img);
                         listItem.appendChild(document.createTextNode(pokemonData.name));
 
-                        const shinyBtn = document.createElement("button");
-                        shinyBtn.innerHTML = "shiny";
-                        shinyBtn.addEventListener("click", () => {
-                            currentUrl = currentUrl === pokemonData.sprites.front_default ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default;
-                            img.src = currentUrl;
-                        });
-                        listItem.appendChild(shinyBtn);
-                        pokemonList.appendChild(listItem);
 
-                        pokemonData["types"].forEach(type => {
-                            console.log(type);
-                            const typeFilter = document.querySelector("#type-filter");
-                            typeFilter.addEventListener("change", event => {
-                                filteredPokemon = filterByCriteria(type.name, event.target.value, averageStatFilter.value, evolutionFilter.value);
-                                displayPokemon(filteredPokemon);
-                            });
-                        })
+                        pokemonList.appendChild(listItem);
 
                     });
             });
         }
-
-        const generationFilter = document.querySelector("#generation-filter");
-
-        const averageStatFilter = document.querySelector("#average-stat-filter");
-        const evolutionFilter = document.querySelector("#evolution-filter");
-
-        generationFilter.addEventListener("change", event => {
-            filteredPokemon = filterByCriteria(event.target.value, typeFilter.value, averageStatFilter.value, evolutionFilter.value);
-            displayPokemon(filteredPokemon);
-        });
-
-        averageStatFilter.addEventListener("change", event => {
-            filteredPokemon = filterByCriteria(generationFilter.value, typeFilter.value, event.target.value, evolutionFilter.value);
-            displayPokemon(filteredPokemon);
-        });
-        evolutionFilter.addEventListener("change", event => {
-            filteredPokemon = filterByCriteria(generationFilter.value, typeFilter.value, averageStatFilter.value, event.target.value);
-            displayPokemon(filteredPokemon);
-        });
-
-
-
     });
 
