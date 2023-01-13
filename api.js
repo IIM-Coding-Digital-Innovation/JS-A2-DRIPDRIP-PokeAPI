@@ -194,4 +194,30 @@ function filterPokemon() {
   window.onload = function() {
     filterPokemon();
 }
-  
+
+const searchBar = document.getElementById("searchBar");
+
+searchBar.addEventListener("input", function() {
+    const searchValue = searchBar.value;
+    console.log(searchValue)
+
+    // Utiliser l'API PokeAPI pour récupérer les informations d'un pokemon
+		fetch(`https://pokeapi.co/api/v2/pokemon/${searchValue}`).then(response => response.json()).then(data => {
+			if(data){
+				const pokemonName = data.name;
+				const pokemonId = data.id;
+				const pokemonWeight = data.weight;
+				const pokemonHeight = data.height;
+				const pokemonImage = data.sprites.front_default;
+				const pokemonListElement = document.getElementById('pokemon-list');
+				pokemonListElement.innerHTML = `<p>Name: ${pokemonName}</p>
+												<p>Id: ${pokemonId}</p>
+												<p>Weight: ${pokemonWeight}</p>
+												<p>Height: ${pokemonHeight}</p>
+												<img src=${pokemonImage}>`
+			}else{
+				const pokemonListElement = document.getElementById('pokemon-list');
+				pokemonListElement.innerHTML = `<p>Pokemon not found</p>`
+			}
+			});
+		});
