@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function $_GET(param) {
+            var vars = {};
+            window.location.href.replace( location.hash, '' ).replace( 
+                /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+                function( m, key, value ) { // callback
+                    vars[key] = value !== undefined ? value : '';
+                }
+            );
+        
+            if ( param ) {
+                return vars[param] ? vars[param] : null;	
+            }
+            return vars;
+        }    
+        </script>
+</head>
+<body>
+
+    <div class = "pokemon-infos">
+        <script type="text/javascript">document.write('<img src="'+ ($_GET('pokeImg')) +'" />');</script>
+        <p><script type="text/javascript">document.write($_GET('pokeName'));</script></p>
+    </div>
+
+
+    
+</body>
+<script src="single.js"></script>
+</html>
