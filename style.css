@@ -5,8 +5,10 @@ body {
    }
 
 .pokemon-card {
+    list-style: none;
     display: flex;
     flex-wrap: wrap;
+    text-align: center;
     align-items: center;
     justify-content: center;
     margin: 10px;
@@ -45,7 +47,8 @@ body {
 #type, #generation {
     /* Dimensions */
     width: 200px;
-    height: 35px;
+    height: 40px;
+
     /* Style de bordure */
     border: 1px solid #ccc;
     border-radius: 5px;
