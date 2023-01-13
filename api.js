@@ -15,12 +15,56 @@ function filterPokemon() {
                     return fetch(pokemon.url)
                         .then(response => response.json())
                         .then(pokemonData => {
+                            console.log(pokemonData)
+                            pokemonData['types'].forEach(type => {
+                                console.log(type.type.url)
+                                fetch(type.type.url)
+                                    .then(res => res.json())
+                                    .then(typeData => {
+                                        console.log(typeData.name)
+                                        pokemonContainer.addEventListener('mouseover', (event) => {
+                                            if (typeData.name === "fire") {
+                                                pokemonContainer.style.background = "orangered";
+                                                setTimeout(() => {
+                                                    pokemonContainer.style.background = "";
+                                                    nameElement.style.color = "";
+                                                }, 1000);
+                                            }
+                                            if (typeData.name === "water") {
+                                                pokemonContainer.style.background = "blue";
+                                                nameElement.style.color = "white";
+                                                setTimeout(() => {
+                                                    pokemonContainer.style.background = "";
+                                                    nameElement.style.color = "";
+                                                }, 1000);
+                                            }
+                                            if (typeData.name === "grass") {
+                                                pokemonContainer.style.background = "green";
+                                                nameElement.style.color = "white";
+                                                setTimeout(() => {
+                                                    pokemonContainer.style.background = "";
+                                                    nameElement.style.color = "";
+                                                }, 1000);
+                                            }
+                                            if (typeData.name === "bug") {
+                                                pokemonContainer.style.background = "#bc6c25";
+                                                nameElement.style.color = "white";
+                                                setTimeout(() => {
+                                                    pokemonContainer.style.background = "";
+                                                    nameElement.style.color = "";
+                                                }, 1000);
+                                            }
+                                        });
+                                    })
+                            })
                             // Créer la div conteneur pour chaque élément <li>
                             const pokemonContainer = document.createElement('div');
                             pokemonContainer.classList.add('pokemon-card');
                             // Créer l'élément <li> pour chaque pokemon
                             const pokemonElement = document.createElement('li');
+                            pokemonElement.style.listStyle = "none"
                             const nameElement = document.createElement('p');
+                            nameElement.style.fontSize = "20px"
                             const imageElement = document.createElement('img');
                             const seeMoreButton = document.createElement('button');
                             const shinyBtn = document.createElement("button");
