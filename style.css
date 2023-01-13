@@ -1,4 +1,90 @@
-.affichage{
+body {
+    background: url("background_home.jpg") no-repeat center fixed;
+    background-size: cover;
+    z-index: -1;
+   }
+
+.pokemon-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px gray;
+    width: 300px;
+    height: 200px;
+    z-index: 1;
+    background-color: white;
+  }
+  
+  .pokemon-card img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+  }
+
+  .test {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 10px;
+}
+
+
+.type-list, .generation-list {
+    /* Positionnement */
+    position: relative;
+    display: inline-block;
+    /* Marges */
+    margin: 20px;
+}
+
+#type, #generation {
+    /* Dimensions */
+    width: 200px;
+    height: 35px;
+    /* Style de bordure */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* Style de police */
+    font-size: 16px;
+    /* Padding */
+    padding: 10px;
+}
+
+
+#groupe-bouton {
+    /* Dimensions */
+    width: 200px;
+    height: 40px;
+  
+    /* Couleur de fond */
+    background-color: #f7da1a;
+  
+    /* Couleur de la police */
+    color: white;
+  
+    /* Style de bordure */
+    border: none;
+    border-radius: 10px;
+  
+    /* Style de police */
+    font-size: 18px;
+    font-weight: bold;
+  
+    /* Positionnement */
+    position: absolute;
+    top: 5%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+  
+    /* Effet au survol */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#groupe-bouton:hover {
+    background-color: #ab8211;
 }

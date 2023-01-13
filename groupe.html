@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="groupe.css" >
+    <title>PokeDex</title>
+</head>
+<body>
+    
+    <main>
+        <div>  
+            <ul id="pokemon-container" class="affichage"></ul>
+        </div>
+
+        <div>
+            <form action="javascript:addTeam()">
+                <input type="text" id="new-team-name" placeholder="Nom de l'équipe">
+                <button type="submit" id="add-team">Ajouter une équipe</button>
+            </form>
+            <ul id="teams"></ul>
+        </div>
+        <button class="back" id="back-bouton">Revenir au wiki</button>
+    </main>
+    
+    <script src="groupe.js"></script>
+</body>
+
+<script>
+    // Récupération du bouton
+    const bouton = document.querySelector('#back-bouton');
+    // Attachement de la fonction à l'événement de click
+    bouton.addEventListener('click', click);
+    function click() {
+        document.location.href=`home.html`;
+    }
+</script>
+</html>
