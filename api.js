@@ -23,6 +23,7 @@ function filterPokemon() {
                             const imageElement = document.createElement('img');
                             const seeMoreButton = document.createElement('button');
                                 seeMoreButton.textContent = "Voir plus";
+                                seeMoreButton.classList = "pokemon-button";
                                 seeMoreButton.addEventListener('click', () => {
                                     document.location.href=`single.html?pokeId=${pokemonData.id}&pokeName=${pokemonData.name}&pokeImg=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png&pokeWeight=${pokemonData.weight}&pokeHeight=${pokemonData.height}`; 
                                 });

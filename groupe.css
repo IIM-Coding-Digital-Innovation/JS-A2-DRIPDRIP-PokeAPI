@@ -96,3 +96,29 @@ main>div {
 .back:hover {
     background-color: #ab8211;
 }
+
+/* pour l'animation du curseur */
+* {
+    cursor: url(Cartoon\ Hand\ normal.cur), auto; /* l'image de la souris */
+  }
+  
+  /* pour l'animation de la pokeball */
+  @keyframes shake {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(-10deg); }
+    20% { transform: rotate(10deg); }
+    30% { transform: rotate(-10deg); }
+    40% { transform: rotate(10deg); }
+    50% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  .pokemon-cursor {
+    width: 50px; /* taille de l'icone */
+    height: 50px;
+    position: absolute; /* pour centrer l'icone */
+    top: -20px;
+    left: -20px;
+    animation: shake 0.5s ease-out infinite; /* pour l'animation */
+  }
+  

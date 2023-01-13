@@ -88,3 +88,50 @@ body {
 #groupe-bouton:hover {
     background-color: #ab8211;
 }
+
+
+.pokemon-button {
+    background-color: #F8D030; /* couleur jaune de la pokeball */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50%; /* pour faire une forme ronde */
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.pokemon-button img {
+  width: 30px; /* taille de l'icone */
+  vertical-align: middle; /* pour centrer l'icone */
+}
+
+.pokemon-button:hover {
+  background-color: #F85888; /* changer la couleur lorsque la souris est sur le bouton */
+}
+
+
+/* pour l'animation du curseur */
+* {
+    cursor: url(Cartoon\ Hand\ normal.cur), auto; /* l'image de la souris */
+  }
+  
+  /* pour l'animation de la pokeball */
+  @keyframes shake {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(-10deg); }
+    20% { transform: rotate(10deg); }
+    30% { transform: rotate(-10deg); }
+    40% { transform: rotate(10deg); }
+    50% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  .pokemon-cursor {
+    width: 50px; /* taille de l'icone */
+    height: 50px;
+    position: absolute; /* pour centrer l'icone */
+    top: -20px;
+    left: -20px;
+    animation: shake 0.5s ease-out infinite; /* pour l'animation */
+  }
+  
