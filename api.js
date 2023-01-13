@@ -1,4 +1,5 @@
 const numberOfPokemonsToDisplay = 10;
+let currentUrl;
 
 function filterPokemon() {
     // Récupérer la valeur sélectionnée
@@ -22,6 +23,12 @@ function filterPokemon() {
                             const nameElement = document.createElement('p');
                             const imageElement = document.createElement('img');
                             const seeMoreButton = document.createElement('button');
+                            const shinyBtn = document.createElement("button");
+                            shinyBtn.innerHTML = "shiny";
+                            shinyBtn.addEventListener("click", () => {
+                                currentUrl = currentUrl === pokemonData.sprites.front_default ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default;
+                                imageElement.src = currentUrl;
+                            });
                                 seeMoreButton.textContent = "Voir plus";
                                 seeMoreButton.addEventListener('click', () => {
                                     document.location.href=`single.html?pokeId=${pokemonData.id}&pokeName=${pokemonData.name}&pokeImg=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png&pokeWeight=${pokemonData.weight}&pokeHeight=${pokemonData.height}`; 
@@ -32,6 +39,7 @@ function filterPokemon() {
                             pokemonElement.appendChild(nameElement);
                             pokemonElement.appendChild(imageElement);
                             pokemonElement.appendChild(seeMoreButton);
+                            pokemonElement.appendChild(shinyBtn);
                             // Ajouter l'élément <li> à la div conteneur
                             pokemonContainer.appendChild(pokemonElement);
                             return pokemonContainer;
@@ -68,16 +76,24 @@ function filterPokemon() {
                                 const nameElement = document.createElement('p');
                                 const imageElement = document.createElement('img');
                                 const seeMoreButton = document.createElement('button');
+                                const shinyBtn = document.createElement("button");
+                                shinyBtn.innerHTML = "shiny";
+                                shinyBtn.addEventListener("click", () => {
+                                    currentUrl = currentUrl === pokemonData.sprites.front_default ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default;
+                                    imageElement.src = currentUrl;
+                                });
                                 seeMoreButton.textContent = "Voir plus";
                                 seeMoreButton.addEventListener('click', () => {
                                     document.location.href=`single.html?pokeId=${pokemonData.id}&pokeName=${pokemonData.name}&pokeImg=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png&pokeWeight=${pokemonData.weight}&pokeHeight=${pokemonData.height}`; 
                                 });
+
                                 nameElement.textContent = pokemonData.name;
                                 imageElement.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`;
                                 imageElement.alt = pokemonData.name;
                                 pokemonElement.appendChild(nameElement);
                                 pokemonElement.appendChild(imageElement);
                                 pokemonElement.appendChild(seeMoreButton);
+                                pokemonElement.appendChild(shinyBtn);
                                 // Ajouter l'élément <li> à la div conteneur
                                 pokemonContainer.appendChild(pokemonElement);
                                 return pokemonContainer;
@@ -118,6 +134,12 @@ function filterPokemon() {
 					const nameElement = document.createElement('p');
 					const imageElement = document.createElement('img');
                     const seeMoreButton = document.createElement('button');
+                    const shinyBtn = document.createElement("button");
+                    shinyBtn.innerHTML = "shiny";
+                    shinyBtn.addEventListener("click", () => {
+                        currentUrl = currentUrl === pokemonData.sprites.front_default ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default;
+                        imageElement.src = currentUrl;
+                    });
                                 seeMoreButton.textContent = "Voir plus";
                                 seeMoreButton.addEventListener('click', () => {
                                     document.location.href=`single.html?pokeId=${pokemonData.id}&pokeName=${pokemonData.name}&pokeImg=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png&pokeWeight=${pokemonData.weight}&pokeHeight=${pokemonData.height}`; 
@@ -128,6 +150,7 @@ function filterPokemon() {
 					pokemonElement.appendChild(nameElement);
 					pokemonElement.appendChild(imageElement);
                     pokemonElement.appendChild(seeMoreButton);
+                    pokemonElement.appendChild(shinyBtn);
 					// Ajouter l'élément <li> à la div conteneur
 					pokemonContainer.appendChild(pokemonElement);
 					return pokemonContainer;
