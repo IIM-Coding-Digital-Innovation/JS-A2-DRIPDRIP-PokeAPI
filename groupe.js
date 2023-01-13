@@ -15,11 +15,8 @@ const pokemonContainer = document.getElementById("pokemon-container");
 for (let i = 0; i < pokemons.length; i++) {
       // Créer la div qui contiendra les informations du Pokémon
     let pokemonDiv = document.createElement("canva");
-    pokemonDiv.setAttribute('class','myCanvas');
+    pokemonDiv.setAttribute('class','myCanvas tremble');
     pokemonDiv.setAttribute('id','tremble');
-
-
-    
 
         // Ajouter des styles à la div pour une présentation agréable
     pokemonDiv.style.backgroundColor = '#919492';
