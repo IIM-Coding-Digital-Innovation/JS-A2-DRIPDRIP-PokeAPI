@@ -10,14 +10,20 @@ Our project uses the PokeAPI API to create an interactive experience for Pokemon
 ## Features
 
 🔋 Color for card design by pokemon types
+<br>
 🕵🏽‍♂️ Pokemon Filter System (by generation & types)
+<br>
 👫🏼 Group System / Drag and drop image system (displays overall group stats)
+<br>
 📚 Single stats page for pokemon on the home page with "voir plus" button
+<br>
 🔎 Search Bar System for view pokemon by id or name
+<br>
 
 Minigames : 
 
   ⚔️ PokeFight 
+<br>
   ✨ Guess The Pokemon
 
 
