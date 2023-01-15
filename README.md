@@ -6,6 +6,21 @@
 ## Introduction
 Our project uses the PokeAPI API to create an interactive experience for Pokemon fans. With our tool, users can sort Pokemons by type and generation, search for a particular Pokemon using its name or ID, and even access fun mini-games such as "Pokefight" and "Guess The Pokemon". Besides, users can also create their own battle team and explore the abilities of each Pokemon in their team. We hope you enjoy our use of the PokeAPI to make these features available to Pokemon fans.
 
+
+## Features
+
+🔋 Color for card design by pokemon types
+🕵🏽‍♂️ Pokemon Filter System (by generation & types)
+👫🏼 Group System / Drag and drop image system (displays overall group stats)
+📚 Single stats page for pokemon on the home page with "voir plus" button
+🔎 Search Bar System for view pokemon by id or name
+
+Minigames : 
+
+  ⚔️ PokeFight 
+  ✨ Guess The Pokemon
+
+
 ## Team Members
 
 - [@tinkod92](https://github.com/tinkode92) Responsible for the design of the Index page and the group system, retrieving attacks via the API
@@ -13,3 +28,8 @@ Our project uses the PokeAPI API to create an interactive experience for Pokemon
 - [@chevalierblu00](https://github.com/chevalierblu00) Animation on Pokemon cards on the group page and general styling
 - [@antoinebayssac](https://github.com/antoinebayssac) Responsible for the search bar and design of the pages
 - [@failaxite](https://github.com/failaxite) Implementation of search filters for Pokemons (by generation/by types), setting up background music on the home page, implementation of Pokemon stats on a single page when the user clicks on a "see more" button, implementation of 2 mini-games "Pokefight" and "GuessThePokemon" and styling of certain pages.
+
+
+## Realisation link
+
+https://poke-api-project-five.vercel.app/
