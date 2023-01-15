@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="guess.css">
+    <title>Devine le nom du Pokemon</title>
+    <script>
+      var pokemonList;
+      var randomPokemon;
+      var pokemonImage;
+
+      function getPokemonList() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://pokeapi.co/api/v2/pokemon?limit=1000");
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            pokemonList = data.results.map(function(pokemon) {
+              return pokemon.name;
+            });
+            randomPokemon = pokemonList[Math.floor(Math.random() * pokemonList.length)];
+            getPokemonImage();
+          }
+        };
+        xhr.send();
+      }
+
+      function getPokemonImage() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://pokeapi.co/api/v2/pokemon/" + randomPokemon);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            pokemonImage = data.sprites.front_default;
+            document.querySelector("#pokemon-image").src = pokemonImage;
+          }
+        };
+        xhr.send();
+      }
+
+      function checkGuess() {
+        var guess = document.querySelector("#guess").value;
+        if (guess.toLowerCase() === randomPokemon.toLowerCase()) {
+          alert("Félicitations ! Vous avez deviné le nom du Pokémon.");
+        } else {
+          alert("Désolé, le nom du Pokémon était " + randomPokemon + ".");
+        }
+      }
+    </script>
+  </head>
+  <body onload="getPokemonList()">
+    <h1>Devine le nom d'un Pokemon</h1>
+    <img id="pokemon-image" width="250" height="250" style="filter: brightness(0%);" />
+    <br>
+    <br>
+    <input type="text" id="guess" placeholder="Entrez votre devinette">
+    <button onclick="checkGuess()">Deviner</button>
+  </body>
+</html>
