@@ -29,7 +29,7 @@ Minigames :
 
 ## Team Members
 
-- [@tinkod92](https://github.com/tinkode92) Responsible for the design of the Index page and the group system, retrieving attacks via the API
+- [@tinkod92](https://github.com/tinkode92) Responsible for the design of the Index page (video) and mores and the group system, retrieving attacks via the API, creation of the team of 6 with drag and drop
 - [@BDeniss](https://github.com/BDenisss) Retrieving the first 10 Pokemons via the API, color coding of the cards based on Pokemon types, button linking to stats pages, and a button to preview Pokemon in shiny form on the home page
 - [@chevalierblu00](https://github.com/chevalierblu00) Animation on Pokemon cards on the group page and general styling
 - [@antoinebayssac](https://github.com/antoinebayssac) Responsible for the search bar and design of the pages
