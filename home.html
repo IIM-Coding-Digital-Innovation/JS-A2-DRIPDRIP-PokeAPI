@@ -52,6 +52,11 @@
 <div class = "groupe">
     <button id="groupe-bouton">Groupes & Combats</button>
 </div>
+
+<div class = "minigame">
+    <button id="minigame-bouton">Minigames</button>
+</div>
+
 <div>
     <input type="text" id="searchBar" class="" placeholder="Search...">
 </div>
@@ -76,6 +81,15 @@
     bouton.addEventListener('click', click);
     function click() {
         document.location.href=`groupe.html`;
+    }
+
+
+    // Récupération du bouton
+    const minigame = document.querySelector('#minigame-bouton');
+    // Attachement de la fonction à l'événement de click
+    minigame.addEventListener('click', clickminigame);
+    function clickminigame() {
+        document.location.href=`minigame.html`;
     }
 </script>
 </html>

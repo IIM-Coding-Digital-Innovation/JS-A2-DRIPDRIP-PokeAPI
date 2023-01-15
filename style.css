@@ -125,6 +125,40 @@ body {
 }
 
 
+#minigame-bouton {
+  /* Dimensions */
+  width: 200px;
+  height: 40px;
+
+  /* Couleur de fond */
+  background-color: #f7da1a;
+
+  /* Couleur de la police */
+  color: white;
+
+  /* Style de bordure */
+  border: none;
+  border-radius: 10px;
+
+  /* Style de police */
+  font-size: 18px;
+  font-weight: bold;
+
+  /* Positionnement */
+  position: absolute;
+  top: 5%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+
+  /* Effet au survol */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#minigame-bouton:hover {
+  background-color: #ab8211;
+}
+
+
 .pokemon-button {
     background-color: #F8D030; /* couleur jaune de la pokeball */
   color: white;

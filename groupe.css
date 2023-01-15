@@ -131,7 +131,7 @@ main>div {
   }
 
   #tremble:hover {
-    animation: tremble 0.1s; / activer l'animation lorsque la souris passe sur l'élément /
+    animation: tremble 0.1s; /*activer l'animation lorsque la souris passe sur l'élément */
     animation-duration: 2;
     }
 
